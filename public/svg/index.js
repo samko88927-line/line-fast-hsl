@@ -11,9 +11,7 @@ import Champion from "./champion.svg";
 import Prada from "./prada.svg";
 import Beenhere from "./beenhere.svg";
 import MetamaskRound from "./MetamaskRound.svg";
-import 西寧小丸子Round from "./西寧小丸子Round.svg";
 import Tether from "./tether.svg";
-// import ForwardCircle from "./forwardCircle.svg";
 import LocalActivity from "./localActivity.svg";
 import Redeem from "./redeem.svg";
 import Wallet from "./wallet.svg";
@@ -42,7 +40,6 @@ export {
   Tether,
   Beenhere,
   MetamaskRound,
-  西寧小丸子Round,
   LocalActivity,
   Redeem,
   Wallet,
