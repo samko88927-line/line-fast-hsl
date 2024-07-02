@@ -1,6 +1,5 @@
 "use client";
 import useMetaMask from "@/hooks/use-metamask/use-meta-mask";
-import { MetaMask } from "@/public/svg";
 import { RootState } from "@/store";
 import { PlusIcon, RotateCw } from "lucide-react";
 import React from "react";
@@ -31,7 +30,6 @@ const Wallet = () => {
           className="flex flex-1  py-2 rounded-[0.75rem] gap-1 items-center"
         >
           <PlusIcon className="w-4 h-4" />
-          <MetaMask className="w-6 h-6" />
           <span className="gap-1 flex items-center justify-center uppercase">
             MetaMask
           </span>

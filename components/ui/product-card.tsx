@@ -13,7 +13,7 @@ const ProductCard: React.FC<ProductCard> = ({ data }) => {
   const router = useRouter();
 
   const handleClick = () => {
-    router.push(`/product/${data?.id}`);
+    router.push(`/product/${data?._id}`);
   };
 
   return (
@@ -24,7 +24,7 @@ const ProductCard: React.FC<ProductCard> = ({ data }) => {
       {/* Image & actions */}
       <div className="aspect-square rounded-xl bg-gray-100 relative">
         <Image
-          src={data.images?.[0]?.url}
+          src={data.image}
           alt=""
           fill
           className="aspect-square object-cover rounded-md"
@@ -32,12 +32,12 @@ const ProductCard: React.FC<ProductCard> = ({ data }) => {
       </div>
       {/* Description */}
       <div>
-        <p className="font-semibold text-lg">{data.name}</p>
-        <p className="text-sm text-gray-500">{data.category?.name}</p>
+        <p className="font-semibold text-lg">{data.title}</p>
+        <p className="text-sm text-gray-500">{data.categoriesId}</p>
       </div>
       {/* Price & Reiew */}
       <div className="flex items-center justify-between">
-        <Currency value={data?.price} />
+        <Currency value={data?.salePrice} />
       </div>
     </div>
   );

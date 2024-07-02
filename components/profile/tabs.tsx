@@ -5,10 +5,8 @@ import {
   Account,
   Logout,
   Redeem,
-  Language,
-  Nft,
+  // Language,
   Wallet,
-  ReebokLogo,
 } from "@/public/svg";
 import { TabEnum } from "@/hooks/use-profile-tabs/use-profile-tabs";
 import IconButton from "../ui/icon-button";
@@ -71,28 +69,28 @@ const ProfileTabs = () => {
       ),
       action: () => router.push("/profile?myWallet"),
     },
-    {
-      id: TabEnum.myOrder,
-      name: "訂單",
-      active: false,
-      icon: (hoverActive: boolean, clickActive: boolean) => (
-        <IconButton
-          className="w-[24px] h-[24px]"
-          icon={
-            <Nft
-              style={{
-                fill: hoverActive
-                  ? "#faf4fd"
-                  : clickActive
-                  ? "#faf4fd"
-                  : "#f6e2ff",
-              }}
-            />
-          }
-        />
-      ),
-      action: () => router.push("/profile?nftMarket=true"),
-    },
+    // {
+    //   id: TabEnum.myOrder,
+    //   name: "訂單",
+    //   active: false,
+    //   icon: (hoverActive: boolean, clickActive: boolean) => (
+    //     <IconButton
+    //       className="w-[24px] h-[24px]"
+    //       icon={
+    //         <Nft
+    //           style={{
+    //             fill: hoverActive
+    //               ? "#faf4fd"
+    //               : clickActive
+    //               ? "#faf4fd"
+    //               : "#f6e2ff",
+    //           }}
+    //         />
+    //       }
+    //     />
+    //   ),
+    //   action: () => router.push("/profile?nftMarket=true"),
+    // },
     {
       id: TabEnum.myProduct,
       name: t("my-redemption-items"),
@@ -115,31 +113,31 @@ const ProfileTabs = () => {
       ),
       action: () => router.push("/profile?myRedeem=true"),
     },
-    {
-      id: TabEnum.language,
-      name: t("language-settings"),
-      active: false,
-      icon: (hoverActive: boolean, clickActive: boolean) => (
-        <IconButton
-          className="w-[24px] h-[24px]"
-          icon={
-            <Language
-              style={{
-                fill: hoverActive
-                  ? "#faf4fd"
-                  : clickActive
-                  ? "#faf4fd"
-                  : "#f6e2ff",
-              }}
-            />
-          }
-        />
-      ),
-      action: () => {
-        console.log("open");
-        // dispatch(openLanguageOptionModal());
-      },
-    },
+    // {
+    //   id: TabEnum.language,
+    //   name: t("language-settings"),
+    //   active: false,
+    //   icon: (hoverActive: boolean, clickActive: boolean) => (
+    //     <IconButton
+    //       className="w-[24px] h-[24px]"
+    //       icon={
+    //         <Language
+    //           style={{
+    //             fill: hoverActive
+    //               ? "#faf4fd"
+    //               : clickActive
+    //               ? "#faf4fd"
+    //               : "#f6e2ff",
+    //           }}
+    //         />
+    //       }
+    //     />
+    //   ),
+    //   action: () => {
+    //     console.log("open");
+    //     // dispatch(openLanguageOptionModal());
+    //   },
+    // },
     {
       id: TabEnum.logout,
       name: t("logout"),
