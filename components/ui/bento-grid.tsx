@@ -2,6 +2,7 @@ import { ProductHelper } from "@/helpers/product-helper";
 import { cn } from "@/lib/utils";
 import { Product } from "@/types";
 import { IconHeart, IconShoppingCart } from "@tabler/icons-react";
+import Image from "next/image";
 
 export const BentoGrid = ({
   className,
@@ -13,7 +14,7 @@ export const BentoGrid = ({
   return (
     <div
       className={cn(
-        "grid md:auto-rows-[36rem] grid-cols-1 md:grid-cols-4 gap-4 max-w-6xl mx-auto ",
+        "grid pb-4 grid-cols-1 md:grid-cols-4 gap-4 max-w-6xl mx-auto ",
         className
       )}
     >
@@ -32,16 +33,21 @@ export const ProductVerticalCard = ({ item }: { item: Product }) => {
   // const productHelper = ProductHelper.calculateSalePercentage();
   return (
     <div
-      className={`rounded-2xl shadow-2xl overflow-hidden bg-black bg-opacity-50 `}
+      className={`rounded-2xl shadow-2xl overflow-hidden bg-black bg-opacity-50`}
       // onClick={handleProductClick}
     >
       <div className="flex flex-col items-center">
         <div className="relative w-full">
-          <img
+          <Image
             src={item.image}
             alt={item.title}
             className="rounded-2xl w-full object-cover "
+            width={500}
+            height={500}
+            blurDataURL="data:..."
+            placeholder="blur"
           />
+
           {salePercentage && (
             <div className="absolute bottom-3 right-3 bg-orange-700 font-thin text-sm rounded-md px-2 py-1 text-white">
               {salePercentage}

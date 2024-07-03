@@ -26,8 +26,11 @@ const Gallery: React.FC<GalleryProps> = ({ images = [] }) => {
           <Tab.Panel key={image.id}>
             <div className="aspect-square relative h-full w-full sm:rounded-2xl overflow-hidden">
               <NextImage
-                fill
                 src={image.url}
+                width={800}
+                height={800}
+                quality={75}
+                priority={true}
                 alt="Image"
                 className="object-cover object-center"
               />

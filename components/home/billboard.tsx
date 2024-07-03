@@ -1,6 +1,6 @@
 "use client";
 import { BillboardType } from "@/types";
-import { SparklesCore } from "../ui/sparkles";
+// import { SparklesCore } from "../ui/sparkles";
 import { useRef } from "react";
 import Autoplay from "embla-carousel-autoplay";
 import {

@@ -6,6 +6,7 @@ import { testimonials } from "./data.js";
 import VideoComponent from "@/components/home/video";
 import getVideo from "@/actions/get-video";
 import { getProducts } from "@/actions/get-product";
+import ContactInfo from "@/components/home/contact-info";
 
 export default async function Home() {
   // const billboard = await getBillboard(); //Billboard Id
@@ -16,7 +17,7 @@ export default async function Home() {
     <>
       <Billboard data={getBillboardJson} />
       <ProductsGrid data={reponse.products} />
-
+      <ContactInfo />
       {/* <Banner /> */}
       {/* <VideoComponent data={video} /> */}
       {/* <div className="h-auto w-full bg-background bg-grid-small-white/[0.2] relative flex justify-center">

@@ -7,23 +7,23 @@ const getBillboardJson: BillboardType[] = [
   {
     link: "https://bit.ly/3s6Y2Tj",
     image:
-      "https://res.cloudinary.com/dgr5mhnbn/image/upload/v1719123655/hot-pot-mom/index-banners/promo-banner-1.jpg",
+      "https://res.cloudinary.com/dgr5mhnbn/image/upload/v1719123655/hot-pot-mom/index-banners/promo-banner-1.webp",
   },
   {
     link: "/",
     image:
-      "https://res.cloudinary.com/dgr5mhnbn/image/upload/v1719123655/hot-pot-mom/index-banners/promo-banner-2.jpg",
+      "https://res.cloudinary.com/dgr5mhnbn/image/upload/v1719123655/hot-pot-mom/index-banners/promo-banner-2.webp",
   },
   {
     link: "/",
     image:
-      "https://res.cloudinary.com/dgr5mhnbn/image/upload/v1719123655/hot-pot-mom/index-banners/promo-banner-3.jpg",
+      "https://res.cloudinary.com/dgr5mhnbn/image/upload/v1719123655/hot-pot-mom/index-banners/promo-banner-3.webp",
   },
 
   {
     link: "/",
     image:
-      "https://res.cloudinary.com/dgr5mhnbn/image/upload/v1719123655/hot-pot-mom/index-banners/promo-banner-4.jpg",
+      "https://res.cloudinary.com/dgr5mhnbn/image/upload/v1719123655/hot-pot-mom/index-banners/promo-banner-4.webp",
   },
   // ,
   // {
