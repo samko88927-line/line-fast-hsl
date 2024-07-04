@@ -24,21 +24,21 @@ const Navbar = () => {
               href="/"
               className="ml-4 flex lg:ml-0 gap-x-2 pr-8 items-center"
             >
-              <NextImage
+              {/* <NextImage
                 src="/img/logo.png"
                 alt="西寧小丸子logo"
                 width={44}
                 height={44}
                 className="w-8 h-8 rounded-full"
-              />
+              /> */}
               <p className="font-bold text-xl uppercase text-white">
-                西寧小丸子
+                Line-tv 測試頻道
               </p>
             </Link>
-            <NavigationMenu data={categories} />
+            {/* <NavigationMenu data={categories} /> */}
           </div>
           {/* <NavbarActions /> */}
-          {userId ? (
+          {/* {userId ? (
             <div className="flex items-center justify-center gap-2">
               <Link href="/profile">
                 <IconSettings className="h-8 w-8 text-neutral-500" />
@@ -47,7 +47,7 @@ const Navbar = () => {
             </div>
           ) : (
             <SignInButton />
-          )}
+          )} */}
         </div>
       </div>
     </div>

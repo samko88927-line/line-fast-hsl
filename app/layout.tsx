@@ -8,8 +8,8 @@ import { ClerkProvider } from "@clerk/nextjs";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "西寧市場：西寧小丸子",
-  description: "日式火鍋料、川島火鍋料、甜不辣，線上選購日式火鍋料的最佳選擇。",
+  title: "Line TV直播測試",
+  description: "測試直播測試",
   icons: [
     {
       url: "/svg/logo.svg",
