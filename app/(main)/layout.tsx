@@ -8,7 +8,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     <div className="relative overflow-hidden grid justify-center bg-[url('/texture/noise-light.png')]">
       <div className="max-w-screen-xl">
         {children}
-        <Footer />
+        {/* <Footer /> */}
       </div>
     </div>
   );

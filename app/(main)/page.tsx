@@ -10,16 +10,16 @@ import ContactInfo from "@/components/home/contact-info";
 
 export default async function Home() {
   // const billboard = await getBillboard(); //Billboard Id
-  const reponse = await getProducts(); //Billboard Id
-  const videoId = "66";
-  // const video = await getVideo(videoId); //Billboard Id
+  // const reponse = await getProducts(); //Billboard Id
+  const videoId = "60";
+  const video = await getVideo(videoId); //Billboard Id
   return (
     <>
-      <Billboard data={getBillboardJson} />
+      {/* <Billboard data={getBillboardJson} />
       <ProductsGrid data={reponse.products} />
-      <ContactInfo />
+      <ContactInfo /> */}
       {/* <Banner /> */}
-      {/* <VideoComponent data={video} /> */}
+      <VideoComponent data={video} />
       {/* <div className="h-auto w-full bg-background bg-grid-small-white/[0.2] relative flex justify-center">
         <div className="absolute pointer-events-none inset-0 flex items-center justify-center bg-black [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]"></div>
         <div className="h-[30rem] rounded-md flex flex-col antialiased  dark:bg-black dark:bg-grid-white/[0.05] items-center justify-center relative overflow-hidden">
