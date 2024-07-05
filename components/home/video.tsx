@@ -41,14 +41,19 @@ const VideoComponent: React.FC<VideoProps> = ({ data }) => {
   const hlsRef = useRef<Hls | null>(null);
   const [levels, setLevels] = useState<any>([]);
   const [selectedLevel, setSelectedLevel] = useState<number>(-1);
+  const [fragmentData, setFragmentData] = useState<string[]>([]);
   useEffect(() => {
     const video = document.createElement("video");
     video.controls = true;
     video.style.width = "100%";
     video.style.height = "100%";
+    if (data.programSchedule?.liveProgram?.playbackUrl == undefined) {
+      return;
+    }
 
     // const proxyUrl = "https://cors-anywhere.herokuapp.com/";
     const targetUrl = data.programSchedule.liveProgram.playbackUrl;
+
     const SSAISourceQueryStringByAd = {
       "ads.chocomember_id": "",
       "ads.app_id": "062097f1b1f34e11e7f82aag22000aee",
@@ -67,22 +72,29 @@ const VideoComponent: React.FC<VideoProps> = ({ data }) => {
       appendix: SSAISourceQueryStringByAd,
     });
 
+    console.log("Playback URL with query string:", corsUrl);
+
     if (Hls.isSupported()) {
       const hls = new Hls();
+      hlsRef.current = hls;
       hls.loadSource(corsUrl);
       hls.attachMedia(video);
-      hls.on(Hls.Events.MANIFEST_PARSED, () => {
+      hls.on(Hls.Events.MANIFEST_PARSED, (event, data) => {
         setLevels(hls.levels);
+        console.log("Available quality levels:", hls.levels);
         video.play();
       });
 
-      // // Set the quality level (example: set to highest quality level)
-      // hls.on(Hls.Events.LEVEL_SWITCHED, (_, data) => {
-      //   console.log(`Quality level switched to: ${data.level}`);
-      // });
+      hls.on(Hls.Events.FRAG_LOADED, (event, data) => {
+        setFragmentData((prev) => [
+          ...prev,
+          `Fragment loaded: ${data.frag.url}`,
+        ]);
+      });
 
-      // // Set a specific quality level, -1 for auto, 0 for the first level, 1 for the second, etc.
-      // hls.nextLevel = -1; // Auto quality
+      hls.on(Hls.Events.LEVEL_SWITCHED, (event, data) => {
+        console.log("Quality level switched to:", data.level);
+      });
 
       if (videoRef.current) {
         videoRef.current.appendChild(video);
@@ -100,6 +112,10 @@ const VideoComponent: React.FC<VideoProps> = ({ data }) => {
         video.play();
       });
 
+      video.addEventListener("canplay", () => {
+        console.log("Video can play");
+      });
+
       if (videoRef.current) {
         videoRef.current.appendChild(video);
       }
@@ -113,6 +129,13 @@ const VideoComponent: React.FC<VideoProps> = ({ data }) => {
       console.error("HLS is not supported in this browser");
     }
   }, [data]);
+
+  useEffect(() => {
+    const fragmentLogDiv = document.getElementById("fragment-log");
+    if (fragmentLogDiv) {
+      fragmentLogDiv.scrollTop = fragmentLogDiv.scrollHeight;
+    }
+  }, [fragmentData]);
 
   const handleQualityChange = (event: any) => {
     const level = parseInt(event.target.value);
@@ -147,6 +170,11 @@ const VideoComponent: React.FC<VideoProps> = ({ data }) => {
           </select>
         </div>
       )}
+      <div id="fragment-log" className="h-40 overflow-auto  p-4 mt-4">
+        {fragmentData.map((fragment, index) => (
+          <div key={index}>{fragment}</div>
+        ))}
+      </div>
     </div>
   );
 };
