@@ -1,5 +1,3 @@
-import { DEFAULT_LOCALE, LOCALES } from "./i18n.config.js";
-
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   async rewrites() {
@@ -9,10 +7,6 @@ const nextConfig = {
         destination: "http://localhost:5000/:path*",
       },
     ];
-  },
-  i18n: {
-    defaultLocale: DEFAULT_LOCALE,
-    locales: LOCALES,
   },
   images: {
     remotePatterns: [
