@@ -3,18 +3,10 @@ import NextImage from "next/image";
 import { NavigationMenu } from "./main-nav";
 import Container from "@/components/ui/container";
 import { Category } from "@/types";
-import SignInButton from "./sign-in-button";
-import { UserButton } from "@clerk/nextjs";
-import { auth } from "@clerk/nextjs";
-import { IconSettings } from "@tabler/icons-react";
-import { redirect, useRouter } from "next/navigation";
 
 // import getCategories from "@/actions/get-categories";
 const Navbar = () => {
   // const categories = await getCategories();
-  const categories: Category[] = [];
-  const { userId } = auth();
-
   return (
     <div className="fixed top-0 z-50 w-full bg-black border-b-[1px] border-gray-900 bg-opacity-60 backdrop-blur-sm">
       <div className="mx-auto max-w-6xl flex items-center px-8">
