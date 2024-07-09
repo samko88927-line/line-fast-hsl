@@ -1,5 +1,3 @@
-import { DEFAULT_LOCALE, LOCALES } from "./i18n.config.js";
-
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   async rewrites() {
