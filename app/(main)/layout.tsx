@@ -1,7 +1,5 @@
 "use client";
-// import { store } from "@/store";
 import React from "react";
-import "../../i18n";
 import Footer from "@/components/common/footer";
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
