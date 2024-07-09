@@ -10,10 +10,6 @@ const nextConfig = {
       },
     ];
   },
-  i18n: {
-    defaultLocale: DEFAULT_LOCALE,
-    locales: LOCALES,
-  },
   images: {
     remotePatterns: [
       {
