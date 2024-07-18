@@ -13,7 +13,27 @@ import { parse, stringify } from "querystring";
 interface VideoProps {
   data: VideoType;
 }
-
+function convertToCSV(data: any) {
+  const csvRows = [];
+  const headers = ["Fragment Log"];
+  csvRows.push(headers.join(","));
+  for (const row of data) {
+    csvRows.push(row);
+  }
+  return csvRows.join("\n");
+}
+function downloadCSV(data: any) {
+  const csvData = convertToCSV(data);
+  const blob = new Blob([csvData], { type: "text/csv" });
+  const url = window.URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.setAttribute("hidden", "");
+  a.setAttribute("href", url);
+  a.setAttribute("download", "fragment_log.csv");
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+}
 const VideoComponent: React.FC<VideoProps> = ({ data }) => {
   function appendQueryString({ url, appendix }: { url: string; appendix: {} }) {
     if (typeof url !== "string") {
@@ -84,12 +104,12 @@ const VideoComponent: React.FC<VideoProps> = ({ data }) => {
         console.log("Available quality levels:", hls.levels);
         video.play();
       });
-
+      const limitLog = 250;
       hls.on(Hls.Events.FRAG_LOADED, (event, data) => {
-        setFragmentData((prev) => [
-          ...prev,
-          `Fragment loaded: ${data.frag.url}`,
-        ]);
+        setFragmentData((prev) => {
+          const newData = [...prev, `Fragment loaded: ${data.frag.url}`];
+          return newData.length > limitLog ? newData.slice(-limitLog) : newData;
+        });
       });
 
       hls.on(Hls.Events.LEVEL_SWITCHED, (event, data) => {
@@ -133,7 +153,7 @@ const VideoComponent: React.FC<VideoProps> = ({ data }) => {
   useEffect(() => {
     const fragmentLogDiv = document.getElementById("fragment-log");
     if (fragmentLogDiv) {
-      fragmentLogDiv.scrollTop = fragmentLogDiv.scrollHeight;
+      fragmentLogDiv.scrollTop = 0; // 維持在最上面
     }
   }, [fragmentData]);
 
@@ -145,15 +165,14 @@ const VideoComponent: React.FC<VideoProps> = ({ data }) => {
     }
   };
 
-  console.log(data);
   return (
     <div className="w-full max-w-6xl p-4 sm:p-6 lg:p-8 rounded-xl overflow-hidden relative">
       <div
         ref={videoRef}
         id="player"
-        className="aspect-video bg-linetv-grey-900"
+        className="aspect-video bg-linetv-grey-900 rounded-lg overflow-hidden"
       />
-      {levels.length > 0 && (
+      {/* {levels.length > 0 && (
         <div className="quality-control">
           <label htmlFor="quality">Quality: </label>
           <select
@@ -169,11 +188,43 @@ const VideoComponent: React.FC<VideoProps> = ({ data }) => {
             ))}
           </select>
         </div>
-      )}
-      <div id="fragment-log" className="h-40 overflow-auto  p-4 mt-4">
-        {fragmentData.map((fragment, index) => (
-          <div key={index}>{fragment}</div>
-        ))}
+      )} */}
+      <div className="flex justify-between items-center">
+        <button
+          onClick={() => downloadCSV(fragmentData)}
+          className="mt-4 p-2 px-4 bg-green-500 text-white rounded"
+        >
+          下載 Fragment Log 為 CSV
+        </button>
+        <div className="">Log 紀錄上限250筆 可調</div>
+      </div>
+      <div
+        id="fragment-log"
+        className="h-80 overflow-auto p-4 px-8 mt-4 border rounded-lg "
+      >
+        {fragmentData.length > 0 && (
+          <div className="mb-2 ">
+            <div className="flex justify-between">
+              <h3 className=" font-medium">前三筆資料</h3>
+              <div className="">紀錄資料總數 {fragmentData.length} 筆</div>
+            </div>
+            {fragmentData
+              .slice(-3)
+              .reverse()
+              .map((fragment, index) => (
+                <div key={`top-${index}`}>{fragment}</div>
+              ))}
+          </div>
+        )}
+        <hr className="mb-2" />
+        {fragmentData
+          .slice(0, -3)
+          .reverse()
+          .map((fragment, index) => (
+            <div className="mb-2" key={index}>
+              {fragment}
+            </div>
+          ))}
       </div>
     </div>
   );
