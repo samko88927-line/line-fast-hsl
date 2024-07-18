@@ -11,8 +11,8 @@ import ContactInfo from "@/components/home/contact-info";
 export default async function Home() {
   // const billboard = await getBillboard(); //Billboard Id
   // const reponse = await getProducts(); //Billboard Id
-  const videoId = "60";
-  const video = await getVideo(videoId); //Billboard Id
+
+  const video = await getVideo(); //Billboard Id
   return (
     <>
       {/* <Billboard data={getBillboardJson} />
