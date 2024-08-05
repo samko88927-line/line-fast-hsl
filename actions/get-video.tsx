@@ -4,7 +4,7 @@ const videoIdWeekday = "60";
 const NEXT_PUBLIC_API_URL_PRO = "https://api.linetv.tw/v1";
 const NEXT_PUBLIC_API_URL = "https://cheetahmen.chocotv.com.tw/v1";
 
-const getBaseUrlAndVideoId = () => {
+export const getBaseUrlAndVideoId = () => {
   const now = new Date();
   const day = now.getUTCDay(); // 獲取當前星期幾，0 是星期日，6 是星期六
   if (day >= 5 && day <= 0) {
