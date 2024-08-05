@@ -7,6 +7,7 @@ import "video.js/dist/video-js.css";
 import { parse, stringify } from "querystring";
 import axios from "axios";
 import Player from "video.js/dist/types/player";
+import VideoTrack from "video.js/dist/types/tracks/video-track";
 const SSAISourceQueryStringByAd = {
   "ads.chocomember_id": "",
   "ads.app_id": "062097f1b1f34e11e7f82aag22000aee",
@@ -78,17 +79,18 @@ const VideoComponent: React.FC<VideoProps> = ({ data }) => {
         // Listen for fragment loading events
         playerRef.current.on("loadedmetadata", () => {
           const tracks = playerRef.current.textTracks();
-          let segmentMetadataTrack;
+          let segmentMetadataTrack: VideoTrack | undefined;
 
           for (let i = 0; i < tracks.length; i++) {
             if (tracks[i].label === "segment-metadata") {
-              segmentMetadataTrack = tracks[i];
+              segmentMetadataTrack = tracks[i] as VideoTrack;
               break;
             }
           }
 
           if (segmentMetadataTrack) {
             segmentMetadataTrack.on("cuechange", () => {
+              //@ts-ignore
               const activeCue = segmentMetadataTrack.activeCues[0];
               if (activeCue) {
                 const fragmentUri = activeCue.value.uri;
@@ -122,10 +124,10 @@ const VideoComponent: React.FC<VideoProps> = ({ data }) => {
   }, [fragmentData]);
   const highlightTsExtension = (text: string) => {
     // Use a regular expression to find the .ts extension and wrap it with a span
-return text.replace(
-  /(index_\d+_\d+\.ts)/g,
-  '<span class="text-yellow-500">$1</span>'
-);
+    return text.replace(
+      /(index_\d+_\d+\.ts)/g,
+      '<span class="text-yellow-500">$1</span>'
+    );
   };
   return (
     <div className="w-full  relative  p-4 sm:p-6 lg:p-8  max-w-[664px]">
