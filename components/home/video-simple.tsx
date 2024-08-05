@@ -8,6 +8,7 @@ import { parse, stringify } from "querystring";
 import axios from "axios";
 import Player from "video.js/dist/types/player";
 import VideoTrack from "video.js/dist/types/tracks/video-track";
+import { getBaseUrlAndVideoId } from "@/actions/get-video";
 const SSAISourceQueryStringByAd = {
   "ads.chocomember_id": "",
   "ads.app_id": "062097f1b1f34e11e7f82aag22000aee",
@@ -31,11 +32,13 @@ const VideoComponent: React.FC<VideoProps> = ({ data }) => {
   const [playbackUrl, setPlaybackUrl] = useState("");
   const [fragmentData, setFragmentData] = useState<string[]>([]);
   const limitLog = 250; // Limit for fragment logs
+
+  const { baseUrl, videoId } = getBaseUrlAndVideoId();
   useEffect(() => {
     const fetchVideoData = async () => {
       try {
         const response = await axios.get(
-          "https://cheetahmen.chocotv.com.tw/v1/fast/channels/60/info"
+          `${baseUrl}/fast/channels/${videoId}/info`
         );
         const targetUrl = response.data.programSchedule.liveProgram.playbackUrl;
         const corsUrl = appendQueryString({
