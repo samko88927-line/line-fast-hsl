@@ -37,10 +37,14 @@ const VideoComponent: React.FC<VideoProps> = ({ data }) => {
   useEffect(() => {
     const fetchVideoData = async () => {
       try {
-        const response = await axios.get(
+        const response = await fetch(
           `${baseUrl}/fast/channels/${videoId}/info`
         );
-        const targetUrl = response.data.programSchedule.liveProgram.playbackUrl;
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data = await response.json();
+        const targetUrl = data.programSchedule.liveProgram.playbackUrl;
         const corsUrl = appendQueryString({
           url: targetUrl,
           appendix: SSAISourceQueryStringByAd,
