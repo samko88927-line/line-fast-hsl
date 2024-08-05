@@ -8,7 +8,7 @@ import { parse, stringify } from "querystring";
 import axios from "axios";
 import Player from "video.js/dist/types/player";
 import VideoTrack from "video.js/dist/types/tracks/video-track";
-import { getBaseUrlAndVideoId } from "@/actions/get-video";
+import getVideo, { getBaseUrlAndVideoId } from "@/actions/get-video";
 const SSAISourceQueryStringByAd = {
   "ads.chocomember_id": "",
   "ads.app_id": "062097f1b1f34e11e7f82aag22000aee",
@@ -34,13 +34,18 @@ const VideoComponent: React.FC<VideoProps> = ({ data }) => {
   const limitLog = 250; // Limit for fragment logs
 
   const { baseUrl, videoId } = getBaseUrlAndVideoId();
+
   useEffect(() => {
     const fetchVideoData = async () => {
       try {
-        const response = await axios.get(
+        const response = await fetch(
           `${baseUrl}/fast/channels/${videoId}/info`
         );
-        const targetUrl = response.data.programSchedule.liveProgram.playbackUrl;
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data = await response.json();
+        const targetUrl = data.programSchedule.liveProgram.playbackUrl;
         const corsUrl = appendQueryString({
           url: targetUrl,
           appendix: SSAISourceQueryStringByAd,
