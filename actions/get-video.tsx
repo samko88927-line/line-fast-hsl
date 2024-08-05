@@ -1,6 +1,6 @@
 import { Product } from "@/types";
 const videoIdWeekend = "42";
-const videoIdWeekday = "60";
+const videoIdWeekday = "42";
 const NEXT_PUBLIC_API_URL_PRO = "https://api.linetv.tw/v1";
 const NEXT_PUBLIC_API_URL = "https://cheetahmen.chocotv.com.tw/v1";
 
